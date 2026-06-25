@@ -12,12 +12,12 @@ export class Role {
 
     @Column({type: 'varchar', length: 250, nullable: true })
     description?: string;
-
-    @ManyToMany(() => User)
+   
+    @ManyToMany(() => User, user => user.roles)
     @JoinTable({
         name: 'user_roles', // Nombre de la tabla intermedia
         joinColumn: {name: 'role_id', referencedColumnName: 'id'},
         inverseJoinColumn: {name: 'user_id', referencedColumnName: 'id'}
     })
-    users?: User[];
+    users!: User[];
 }
