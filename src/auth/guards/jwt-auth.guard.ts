@@ -21,11 +21,11 @@ export class JwtAuthGuard implements CanActivate {
                 secret: this.configService.get<string>('JWT_SECRET'),
             });
             request['user'] = decoded;
-
+            return true;
         }catch (error) {
             throw new UnauthorizedException('Token inválido');
-        }        
-        return true;
+        }      
+        
     }
 
 

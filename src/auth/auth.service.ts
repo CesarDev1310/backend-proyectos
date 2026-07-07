@@ -49,12 +49,12 @@ export class AuthService {
         });
 
         if (!user) {
-            throw new UnauthorizedException('credenciales inválidas');
+            throw new UnauthorizedException('credenciales inválidas - usuario');
         }
 
         const isPasswordValid = await bcrypt.compare(loginDto.password, user.password_hash);
         if (!isPasswordValid) {
-            throw new UnauthorizedException('credenciales inválidas');
+            throw new UnauthorizedException('credenciales inválidas -password');
         }
 
         if (!user.is_active) {
