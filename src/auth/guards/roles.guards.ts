@@ -16,13 +16,15 @@ export class RolesGuard implements CanActivate {
         }
 
         const { user } = context.switchToHttp().getRequest();
+
         if (!user || !user.roles) {
-            return false;
+            throw new ForbiddenException('No tienes roles asignados');
         }
 
-        const hasRole = () => requeridRoles.some((role: string) => user.roles.includes(role));
+        const hasRole = requeridRoles.some((role) => user.roles.includes(role));      
+
         if (!hasRole) {
-            throw new ForbiddenException('Acceso denegado. No tiene permisos para acceder a este recurso');
+            throw new ForbiddenException('Acceso denegado. No tiene permisos para realizar esta acción');
         }
 
         return true;

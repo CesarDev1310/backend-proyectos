@@ -13,7 +13,7 @@ export class ProjectsController {
     ) {}
 
     @Post('register')
-    @Roles('Gerente') // Solo usuarios con rol 'Líder de Proyecto' o 'Administrador' pueden crear proyectos
+    @Roles('Gerente', 'Líder de Proyecto') // Solo usuarios con rol 'Líder de Proyecto' o 'Administrador' pueden crear proyectos
     async createProject(@Body() createProjectDto: CreateProjectDto, @Req() req: any) {
         const userId = req.user.sub; // Obtener el ID del usuario autenticado desde el request
         return await this.projectsService.createProject(createProjectDto, userId);
