@@ -7,6 +7,8 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { RolesModule } from './roles/roles.module';
 import { ProjectsModule } from './projects/projects.module';
+import { TasksController } from './tasks/tasks.controller';
+import { TasksModule } from './tasks/tasks.module';
 
 @Module({
   imports: [
@@ -30,7 +32,8 @@ import { ProjectsModule } from './projects/projects.module';
     UsersModule,
     AuthModule,
     RolesModule,
-    ProjectsModule
+    ProjectsModule,
+    TasksModule
   ],
   controllers: [AppController],
   providers: [AppService],

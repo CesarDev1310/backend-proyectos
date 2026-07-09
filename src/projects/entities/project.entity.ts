@@ -1,6 +1,7 @@
 
+import { Task } from 'src/tasks/entities/task.entity';
 import { User } from 'src/users/entities/user.entity';
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('projects')
 export class Project {
@@ -33,4 +34,6 @@ export class Project {
     @Column({type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', onUpdate: 'CURRENT_TIMESTAMP' })
     updated_at: Date = new Date();
 
+    @OneToMany(() => Task, task => task.project)
+    tasks!: Task[];
 }
