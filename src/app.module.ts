@@ -9,6 +9,7 @@ import { RolesModule } from './roles/roles.module';
 import { ProjectsModule } from './projects/projects.module';
 import { TasksController } from './tasks/tasks.controller';
 import { TasksModule } from './tasks/tasks.module';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [
@@ -33,7 +34,8 @@ import { TasksModule } from './tasks/tasks.module';
     AuthModule,
     RolesModule,
     ProjectsModule,
-    TasksModule
+    TasksModule,
+    CommentsModule
   ],
   controllers: [AppController],
   providers: [AppService],

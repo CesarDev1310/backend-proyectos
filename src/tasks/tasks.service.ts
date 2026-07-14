@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Task } from './entities/task.entity';
@@ -25,6 +25,26 @@ export class TasksService {
             where: { project: { id: projectId } },
             relations: { project: true, assigned_to: true, created_by: true }
         });
+    }
+
+    
+    async updateTaskStatus(taskId: string, status: string, userId: string): Promise<Task> {
+        const task = await this.taskRepository.findOne({ 
+            where: { id: taskId },
+            relations: { assigned_to: true }
+        });
+        if (!task) {
+            throw new NotFoundException(`Tarea con el ID ${taskId} no encontrada`);
+        }
+
+        if(task.assigned_to?.id !== userId) {
+            throw new ForbiddenException('No tiene autorización para actualizar el estado de esta tarea');
+        }
+
+        task.status = status;
+        task.updated_at = new Date();
+
+        return await this.taskRepository.save(task);        
     }
 
 }

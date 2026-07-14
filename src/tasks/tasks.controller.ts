@@ -22,4 +22,10 @@ export class TasksController {
     async findAllTasks(@Param('projectId') projectId: string) {
         return await this.tasksService.getAllTasks(projectId);
     }
+
+    @Post('updateStatus/:taskId')
+    async updateTaskStatus(@Param('taskId') taskId: string, @Body('status') status: string, @Req() req: any) {
+        const userId = req.user.sub;
+        return await this.tasksService.updateTaskStatus(taskId, status, userId);
+    }
 }

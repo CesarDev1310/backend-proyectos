@@ -1,7 +1,8 @@
 
 import { Project } from 'src/projects/entities/project.entity';
 import { User } from 'src/users/entities/user.entity';
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Comment } from 'src/comments/entities/comment.entity';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('tasks')
 export class Task {
@@ -41,4 +42,7 @@ export class Task {
     
     @CreateDateColumn()
     updated_at: Date = new Date();
+
+    @OneToMany(() => Comment, comment => comment.task)
+    comment!: Comment[];
 }
