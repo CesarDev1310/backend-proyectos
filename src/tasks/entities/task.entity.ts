@@ -3,6 +3,7 @@ import { Project } from 'src/projects/entities/project.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Comment } from 'src/comments/entities/comment.entity';
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Attachment } from 'src/attachments/entities/attachment.entity';
 
 @Entity('tasks')
 export class Task {
@@ -45,4 +46,7 @@ export class Task {
 
     @OneToMany(() => Comment, comment => comment.task)
     comment!: Comment[];
+
+    @OneToMany(() => Attachment, attachment => attachment.task) 
+    attachments!: Attachment[];
 }

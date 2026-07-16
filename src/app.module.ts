@@ -7,9 +7,11 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { RolesModule } from './roles/roles.module';
 import { ProjectsModule } from './projects/projects.module';
-import { TasksController } from './tasks/tasks.controller';
 import { TasksModule } from './tasks/tasks.module';
 import { CommentsModule } from './comments/comments.module';
+import { AttachmentsModule } from './attachments/attachments.module';
+import { join } from 'path';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 @Module({
   imports: [
@@ -35,9 +37,12 @@ import { CommentsModule } from './comments/comments.module';
     RolesModule,
     ProjectsModule,
     TasksModule,
-    CommentsModule
+    CommentsModule,
+    AttachmentsModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+      serveRoot: '/uploads',
+    })
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule { }
