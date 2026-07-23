@@ -29,7 +29,10 @@ import { ServeStaticModule } from '@nestjs/serve-static';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
         autoLoadEntities: true, // Carga automática de entidades
-        synchronize: true, // Persiste los cambios en la base de datos automáticamente (solo para desarrollo) 
+        synchronize: true, // Persiste los cambios en la base de datos automáticamente (solo para desarrollo),
+        ssl:{
+          rejectUnauthorized:false
+        }
       })
     }),
     UsersModule,
